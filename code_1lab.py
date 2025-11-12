@@ -1,9 +1,19 @@
-def razdel(vrem):
-    minuti=vrem[vrem.find(":")+1:]
-    chasi=vrem[:vrem.find(":")]
-    minuti=int(minuti)
-    chasi=int(chasi)
-    return(chasi, minuti)
+def razdel(vxod):
+    vrem=vxod.split()
+    if len(vrem)==2 and vrem[0].isdigit() and vrem[1].isdigit():
+        minuti=int(vrem[1])
+        chasi=int(vrem[0])
+        return(chasi,minuti)
+    elif len(vrem)==3 and vrem[0].isdigit() and vrem[2].isdigit() and vrem[1]==":":
+        minuti=int(vrem[2])
+        chasi=int(vrem[0])
+        return(chasi,minuti)
+    else:
+        return(25,66)
+    
+    
+    
+    
 def naz_minut(minuta):
     if minuta==0:
         return("ровно",2)
@@ -53,7 +63,4 @@ if chas>=0 and chas<24 and minut>=0 and minut<61:
     else:
         print(chas_text,minut_text,vremina_sutok[param_chas])
 else:
-    if chas<0 or chas>23:
-        print("Введены недопустимые данные: часы должны быть от 0 до 23")
-    if minut<0 or minut>61:
-        print("Введены недопустимые данные: минуты должны быть от 0 до 59")
+    print("Введены не корректные данные")
