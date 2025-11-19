@@ -51,7 +51,7 @@ def naz_chas(chasi):
 vremina_sutok=["ночи","ночи","утра","дня","дня","вечера"]
 a=input()
 chas,minut=razdel(a)
-if chas>=0 and chas<24 and minut>=0 and minut<61:
+if chas>=0 and chas<24 and minut>=0 and minut<60:
     minut_text,param_min=naz_minut(minut)
     chas_text,param_chas=naz_chas(chas)
     if param_min==2 and param_chas==0:
