@@ -11,34 +11,24 @@ def razdel(vxod):
     else:
         return(25,66)
     
-    
-    
-    
 def naz_minut(minuta):
-    if minuta==0:
-        return("ровно",2)
-    else:
         if minuta>=5 and minuta<=20:
-            return(str(minuta)+" минут",1)
+            return(str(minuta)+" минут")
         elif minuta%10==1:
-            return(str(minuta)+" минута",1)
+            return(str(minuta)+" минута")
         elif minuta%10>=2 and minuta%10<=4:
-            return(str(minuta)+" минуты",1)
+            return(str(minuta)+" минуты")
         else:
-            return(str(minuta)+" минут",1)
+            return(str(minuta)+" минут")
 def naz_chas(chasi):
-    if chasi==0:
+    if chasi>=0 and chasi<6:
         vrem_sutok=0
-    elif chasi>=1 and chasi<=5:
-        vrem_sutok=1
-    elif chasi>=6 and chasi<=11:
-        vrem_sutok=2 
-    elif chasi==12:
-        vrem_sutok=3    
-    elif chasi>=13 and chasi<=17:
-        vrem_sutok=4
+    elif chasi>5 and chasi<12:
+        vrem_sutok=1     
+    elif chasi>11 and chasi<18:
+        vrem_sutok=2
     else:
-        vrem_sutok=5
+        vrem_sutok=3
     if chasi!=12:
         chasi=chasi%12
     if chasi==1:
@@ -48,19 +38,26 @@ def naz_chas(chasi):
     else:
         return(str(chasi)+" часов",vrem_sutok)
 
-vremina_sutok=["ночи","ночи","утра","дня","дня","вечера"]
-a=input()
+vremina_sutok=["ночи","утра","дня","вечера"]
+a=input("введетите время в формате xx xx либо xx:xx   ")
 chas,minut=razdel(a)
 if chas>=0 and chas<24 and minut>=0 and minut<60:
-    minut_text,param_min=naz_minut(minut)
-    chas_text,param_chas=naz_chas(chas)
-    if param_min==2 and param_chas==0:
-        print("полночь")
-    elif param_min==2 and param_chas==3:
-        print("полдень")
-    elif param_min==2:
-        print(chas_text,vremina_sutok[param_chas],"ровно")
+    if minut==0:
+        if chas==0:
+            print("полночь")
+        elif chas==12:
+            print("полдень")
+        else:
+            chas_text,param_chas=naz_chas(chas)
+            print(chas_text,vremina_sutok[param_chas],"ровно")
     else:
+        chas_text,param_chas=naz_chas(chas)
+        minut_text=naz_minut(minut)
         print(chas_text,minut_text,vremina_sutok[param_chas])
 else:
-    print("Введены не корректные данные")
+    if  (minut<0 or minut>59) and (chas<0 or chas>23):
+        print("Введены не корректные данные")
+    elif minut<0 or minut>59:
+        print("Введены недопустимые данные: минуты должны быть от 0 до 59.")
+    elif chas<0 or chas>23:
+        print("Введены недопустимые данные: часы должны быть от 0 до 23.")
