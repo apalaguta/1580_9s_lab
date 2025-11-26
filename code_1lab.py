@@ -20,15 +20,17 @@ def naz_minut(minuta):
             return(str(minuta)+" минуты")
         else:
             return(str(minuta)+" минут")
+        
 def naz_chas(chasi):
     if chasi>=0 and chasi<6:
         vrem_sutok=0
-    elif chasi>5 and chasi<12:
+    elif chasi>=6 and chasi<12:
         vrem_sutok=1     
-    elif chasi>11 and chasi<18:
+    elif chasi>=12 and chasi<18:
         vrem_sutok=2
     else:
         vrem_sutok=3
+        
     if chasi!=12:
         chasi=chasi%12
     if chasi==1:
@@ -39,8 +41,8 @@ def naz_chas(chasi):
         return(str(chasi)+" часов",vrem_sutok)
 
 vremina_sutok=["ночи","утра","дня","вечера"]
-a=input("введетите время в формате xx xx либо xx:xx   ")
-chas,minut=razdel(a)
+vhodnie_dannie=input("введетите время в формате xx xx либо xx:xx   ")
+chas,minut=razdel(vhodnie_dannie)
 if chas>=0 and chas<24 and minut>=0 and minut<60:
     if minut==0:
         if chas==0:
