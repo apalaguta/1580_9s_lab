@@ -25,7 +25,7 @@ def naz_minut(minut):
         if minut // 10 == 0:
             text = ed[minut]
         elif minut % 10 == 0:
-            text = desitki[minut // 10 ]
+            text = desitki[minut // 10 -1]
         else:
             text = desitki[minut // 10 - 1 ] + " " + ed[minut % 10 ]
     text = text + padezh_minut(minut)
@@ -36,8 +36,8 @@ def naz_chas(chas):
     if chas // 10 == 1:
         if chas % 10 == 2:
             return("двенадцать часов")
-        elif chas % 10 == 1 and chas % 10 == 3:
-            return(ed[chas % 10 -1]+" часов")
+        elif chas % 10 == 1 or chas % 10 == 3:
+            return(ed[(chas % 10)]+"надцать часов")
         else:
             a=ed[chas%10]
             a=a[:len(a)-1]
@@ -50,7 +50,7 @@ def naz_chas(chas):
     if chas % 10 == 1:
         return(tex+" час")
     elif chas % 10 >=2 and chas % 10 <=4:
-        reurnn(tex+" часа")
+        return(tex+" часа")
     else:
         return(tex+" часов")
 print("Вас приветствует программа будильник! Введети время на которое нужно поставить будильник в формате часы минуты")
@@ -70,6 +70,10 @@ if len(vhod_dan) == 2 and vhod_dan[0].isdigit()  and vhod_dan[1].isdigit():
         print("Введено неправильное время")
 else:
     print("Введены не корректные данные")
+    
+
+    
+
 """
 Получаем данные от пользователя
 Проверяем, что пользователь ввел 2 параметра и оба из них числа
