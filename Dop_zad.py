@@ -2,7 +2,7 @@ from datetime import*
 import time
 
 def padezh_minut(minuta):
-    if minuta > =5 and minuta <= 20:
+    if minuta >=5 and minuta <= 20:
         return(" минут")
     elif minuta % 10 == 1:
         return(" минута")
