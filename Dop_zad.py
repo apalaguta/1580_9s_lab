@@ -2,26 +2,26 @@ from datetime import*
 import time
 
 def padezh_minut(minuta):
-    if minuta>=5 and minuta<=20:
+    if minuta > =5 and minuta <= 20:
         return(" минут")
-    elif minuta%10==1:
+    elif minuta % 10 == 1:
         return(" минута")
-    elif minuta%10>=2 and minuta%10<=4:
+    elif minuta % 10 >= 2  and minuta % 10 <= 4:
         return(" минуты")
     else:
         return(" минут")
     
 def naz_minut(minut):
-    ed=("ноль","одна","две","три","четыре","пять","шесть","семь","восемь","девять")
-    desitki=("десять","двадцать","тридцать","сорок","пятьдеят")
+    ed = ("ноль","одна","две","три","четыре","пять","шесть","семь","восемь","девять")
+    desitki = ("десять","двадцать","тридцать","сорок","пятьдеят")
     if minut // 10 == 1 and minut % 10 != 0:
         if minut % 10 == 1:
             text = "одиннадцать"
         elif minut % 10 == 2 or minut % 10 == 3 :
             text = ed[minut % 10]+"надцать"
         else:
-            a=ed[minut%10]
-            a=a[:len(a) - 1]
+            a = ed[minut%10]
+            a = a[:len(a) - 1]
             text = a + "надцать"
     else:
         if minut // 10 == 0:
@@ -66,12 +66,12 @@ if len(vhod_dan) == 2 and vhod_dan[0].isdigit()  and vhod_dan[1].isdigit():
         tek_vrem=tek_vrem[ tek_vrem.find(" ") : tek_vrem.rfind(":") ]
         tek_chas=int(tek_vrem[ : tek_vrem.find(":")])
         tek_min=int(tek_vrem[ tek_vrem.find(":") + 1:])
-        tek_vr_min=tek_chas*60+tek_min
-        vr_min=chas*60+minuti
-        razn=vr_min-tek_vr_min
-        if razn<0:
-            razn+=1440
-        time.sleep(razn*60)
+        tek_vr_min = tek_chas * 60 + tek_min
+        vr_min= chas *60 + minuti
+        razn = vr_min - tek_vr_min
+        if razn < 0:
+            razn += 1440
+        time.sleep(razn * 60)
         print("Дзынь-Дзынь!!")
     else:
         print("Введено неправильное время")
