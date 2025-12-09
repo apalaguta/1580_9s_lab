@@ -18,7 +18,7 @@ def naz_minut(minut):
         if minut % 10 == 1:
             text = "одиннадцать"
         elif minut % 10 == 2 or minut % 10 == 3 :
-            text = ed[minut % 10]+"надцать"
+            text = ed[minut % 10] + "надцать"
         else:
             a = ed[minut%10]
             a = a[:len(a) - 1]
@@ -29,23 +29,24 @@ def naz_minut(minut):
         elif minut % 10 == 0:
             text = desitki[minut // 10 -1]
         else:
-            text = desitki[minut // 10 - 1 ] + " " + ed[minut % 10 ]
+            text = desitki[minut // 10 - 1 ] +  " "  + ed[minut % 10]
     text = text + padezh_minut(minut)
     
     return(text)
+    
 def naz_chas(chas):
-    ed=("ноль","один","два","три","четыре","пять","шесть","семь","восемь","девять")
+    ed = ("ноль","один","два","три","четыре","пять","шесть","семь","восемь","девять")
     if chas // 10 == 1:
         if chas % 10 == 2:
             return("двенадцать часов")
         elif chas % 10 == 1 or chas % 10 == 3:
-            return(ed[(chas % 10)]+"надцать часов")
+            return(ed[(chas % 10)] + "надцать часов")
         else:
-            a=ed[chas%10]
-            a=a[:len(a) - 1]
+            a = ed [chas % 10]
+            a = a[:len(a) - 1]
             return(a + "надцать часов")
     elif chas // 10 == 2:
-        tex="двадцать "+ed [chas % 10]
+        tex = "двадцать " + ed [chas % 10]
     else:
         tex=ed[chas % 10 ]
         
