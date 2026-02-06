@@ -3,24 +3,34 @@ import random
 def sozd():
     print("Вы можете создать список вручную(для этого введите цифру 1) или программа может создать список, а вы потом его измените(для этого введите цифру 2)")
     typ_spiska = input()
-    while typ_spiska == "1" or typ_spiska == "2":
+    while typ_spiska != "1" and typ_spiska != "2":
         print("Введенно не корректное значение, повторите попытку")
         typ_spiska = input()
         
     if typ_spiska == "1":
+        print("Введите список")
         prov = True
+        odno_chislo = True
+        sp = input().split()
         while prov:
-            sp = input().split()
+            odno_chislo = True
             if len(sp) == 0:
                 print("Введен пустой список, повторите попытку")
+                odno_chislo = False
             else:
                 for i in sp:
                     if not(i.isdigit() or (i[0] == "-" and i[1:].isdigit())):
-                        print("Введены не корректные данные, повторите попытку") 
-                        continue
-                    
-                sp = list(map(int,sp))
-                return(sp)
+                        print(i,"Не является числом") 
+                        odno_chislo = False
+                        
+            if odno_chislo:
+                prov = False
+            else:
+                print("Повторите попытку")
+                sp = input().split()
+                
+        sp = list(map(int,sp))
+        return(sp)
             
     elif typ_spiska == "2":
         colvo = input("Сколько чисел будет в списке? ")
@@ -33,8 +43,9 @@ def sozd():
         print("Если он вас не устраивает введите порядковый номер(нумерация начинаеться с нуля) и значение, если все устраивает введите 0")
         
         a = input().split()
-        while len(a) == 1 and a[0] != "0" :
-            if not(len(a) == 2 and (a[0].isdigit() or (a[0][0] == "-" and i[0][1:].isdigit())) and a[1].isdigit() and int(a[0]) < colvo):
+        
+        while not(len(a) == 1 and a[0] != "0") :
+            if not(len(a) == 2 and (a[0].isdigit() or (a[1][0] == "-" and i[1][1:].isdigit())) and a[0].isdigit() and int(a[0]) < colvo):
                 print("Не корректный ввод")
             else:
                 sp[int(a[0])] = int(a[1])
@@ -75,8 +86,8 @@ def rasch(ra):
     srav_r = 0
     dl = len(ra)
     rast = dl - 1
-    while rast>=1:
-        nom=0
+    while rast >= 1:
+        nom = 0
         while nom + rast <dl:
             srav_r += 1
             if ra[nom] >= ra[nom+rast]:
@@ -91,36 +102,38 @@ def main():
     print("У нас есть два режима: Демонстративный и Интерактивный")
     print("Для Демонстративного режима введите 1, для Интерактивного режима 2, для выхода 0")
     rezim=input()
-    print(rezim)
     while rezim != "0":
-        if rezim != "1" or rezim != "2":
+        if rezim != "1" and rezim != "2":
             print("Введены не корректные данные, попробуйте занвово")
             rezim = input()
             continue
-        if rezim == "1":
-            print("Вы выбрали Демонстративный режим")
-            colvo_chisel = input("Введите количество чисел")
-            while colvo.isdigit():
-                print("Введенно не корректнрое значение, повторите попытку")
-            spisok =  [random.randint(0, 99) for _ in range(colvo_chisel)]
-            print("Сгенированный список:", *spisok)
-        if rezim == "2":
-            print("Вы выбрали Интерактивный режим")
-            spisok = sozd()
-        rasc = rasch(spisok)
-        buble = buble_s(spisok)
-        select = selection_s(spisok)
-        dlin_vtor_ctolb = max(len(rasc[1]), len(buble[1]), len(select[1]), 19)
-        dlin_treti_ctolb = max(len(rasc[2]), len(buble[2]), len(select[2]), 16)
-        print("")
-        print("Отсортированный массив:",select[0])
-        print("-"*(19+ dlin_vtor_ctolb+ dlin_treti_ctolb))
-        print("Метод сортировки|","кол-во перестановок".rjust(dlin_vtor_ctolb),"|","кол-во сравнений".rjust(dlin_treti_ctolb))
-        print("-"*(19+ dlin_vtor_ctolb+ dlin_treti_ctolb))
-        print("Пузырьковая",buble[1,2])
-        print("Расческой",rasc[1,2])
-        print("Выбором",select[1,2])
-        rezim = input()
-
+        else:
+            if rezim == "1":
+                print("Вы выбрали Демонстративный режим")
+                colvo_chisel = input("Введите количество чисел ")
+                while not(colvo_chisel.isdigit()):
+                    print("Введенно не корректнрое значение, повторите попытку")
+                    colvo_chisel = input()
+                spisok =  [random.randint(0, 99) for _ in range(int(colvo_chisel))]
+                print("Сгенированный список:", *spisok)
+            if rezim == "2":
+                print("Вы выбрали Интерактивный режим")
+                spisok = sozd()
+            rasc = rasch(spisok.copy())
+            buble = buble_s(spisok.copy())
+            select = selection_s(spisok.copy())
+            dlin_vtor_ctolb = max(len(str(rasc[1])), len(str(buble[1])), len(str(select[1])), 19)
+            dlin_treti_ctolb = max(len(rasc[2]), len(buble[2]), len(select[2]), 16)
+            print("")
+            print("Отсортированный массив:",*select[2])
+            print("-"*(21 + dlin_vtor_ctolb+ dlin_treti_ctolb))
+            print("Метод сортировки|","кол-во перестановок".rjust(dlin_vtor_ctolb),"|","кол-во сравнений".rjust(dlin_treti_ctolb))
+            print("-"*(21 + dlin_vtor_ctolb+ dlin_treti_ctolb))
+            print("Пузырьковая".rjust(16)+"|",str(buble[0]).rjust(dlin_vtor_ctolb),"|",str(buble[1]).rjust(dlin_treti_ctolb))
+            print("-"*(21 + dlin_vtor_ctolb+ dlin_treti_ctolb))
+            print("Расческой".rjust(16)+"|",str(rasc[0]).rjust(dlin_vtor_ctolb),"|",str(rasc[1]).rjust(dlin_treti_ctolb))
+            print("-"*(21 + dlin_vtor_ctolb+ dlin_treti_ctolb))
+            print("Выбором".rjust(16)+"|",str(select[0]).rjust(dlin_vtor_ctolb),"|",str(select[1]).rjust(dlin_treti_ctolb))
+            print("-"*(21 + dlin_vtor_ctolb+ dlin_treti_ctolb))
 if __name__ == "__main__":
     main()
