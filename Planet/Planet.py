@@ -26,3 +26,38 @@ class Planet:
         return(self.rastdosol > other.rastdosol)
     def __eq__(self,other):
         return(self.nazv == other.nazv)
+    
+    @nazv.setter
+    def nazv():
+        a = input("Введите название планеты - ")
+        while a != "":
+            a = input("Введена пустая строка. Повторите попытку - ")
+        self.nazv = a
+        
+    @radius.setter
+    def radius():
+        a = input("Введите радиус планеты (в км) - ")
+        while not(a.isdigit()):
+            a = input("Введено не число. Повторите попытку - ")
+        self.radius = a
+    @massa.setter
+    def massa():
+        a = input()
+        while not(a.isdigit()):
+            a = input()
+        self.massa = a
+    @tip.setter
+    def tip():
+        a = input()
+        sp = []
+        while not(a in sp):
+            a = input()
+        self.tip = a
+    @rastdosol.setter
+    def rastdosol():
+        a = input()
+        while not(a.isdigit()):
+            a = input()
+        self.rastdosol = a
+        
+    
